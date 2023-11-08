@@ -12,7 +12,7 @@ docker build -t basic-ssh-git-server:latest .
 
 Run container:
 ```
-docker run -p 2222:22 -v ./data:/home/git/repository -it --name git-remote-server basic-ssh-git-server:latest
+docker run -p 2222:22 -v ./data:/repository -it --name git-remote-server basic-ssh-git-server:latest
 ```
 
 Clone project:
@@ -37,14 +37,13 @@ Run following commands as example:
 docker exec -it -u git $CONTAINER_ID /bin/bash
 
 # Create project
-mkdir ~/repository/$PROJECT_NAME.git
+mkdir /repository/$PROJECT_NAME.git
 
 # Initialize project as remote
-cd ~/repository/$PROJECT_NAME.git
+cd /repository/$PROJECT_NAME.git
 git init --bare
 ```
 > $CONTAINER_ID is id referenced on your container
-> 
 > $PROJECT_NAME is name of project when you make clone
 
 ---
