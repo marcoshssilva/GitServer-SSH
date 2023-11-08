@@ -12,7 +12,7 @@ docker build -t basic-ssh-git-server:latest .
 
 Run container:
 ```
-docker run -p 2222:22 -it --name git-remote-server basic-ssh-git-server:latest
+docker run -p 2222:22 -v ./data:/home/git/repository -it --name git-remote-server basic-ssh-git-server:latest
 ```
 
 Clone project:
