@@ -44,6 +44,7 @@ cd ~/repository/$PROJECT_NAME.git
 git init --bare
 ```
 > $CONTAINER_ID is id referenced on your container
+> 
 > $PROJECT_NAME is name of project when you make clone
 
 ---
