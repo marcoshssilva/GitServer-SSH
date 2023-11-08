@@ -1,0 +1,16 @@
+version: '3.3'
+networks:
+  net:
+    driver: bridge
+volumes:
+  data:
+services:
+  git-server:
+    image: basic-ssh-git-server:latest:latest
+    container_name: 'git-server'
+    ports:
+    - "2222:22"
+    volumes:
+    - data:/home/git/repository
+    networks:
+    - net
