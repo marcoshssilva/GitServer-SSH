@@ -1,4 +1,4 @@
-# Basic-SSH-Git-Server
+# GitServer-SSH
 
 This container is an git remote server to store all your projects.
 
