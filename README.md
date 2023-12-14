@@ -58,3 +58,9 @@ docker exec -it -u root $CONTAINER_ID /bin/bash
 echo 'git:$NEW_PASSWORD' | chpasswd
 ```
 > #NEW_PASSWORD is new password to user, after run this password will encrypted
+
+---
+## Build project with Docker Buildx
+```
+docker buildx build --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x --tag marcoshssilvadev/gitserver-ssh:latest .
+```
