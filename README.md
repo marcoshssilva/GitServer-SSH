@@ -37,8 +37,8 @@ docker exec -it -u git $CONTAINER_ID /bin/bash /root/scripts/create_repository.s
 
 Use following script:
 ```
-# Access shell container with user 'git'
-docker exec -it -u git $CONTAINER_ID /bin/bash /root/scripts/add_ssh_key.sh SSH_KEY_HERE
+# Access shell container with user 'root'
+docker exec -it -u root $CONTAINER_ID /bin/bash /root/scripts/add_ssh_key.sh SSH_KEY_HERE
 ```
 
 ---
