@@ -3,21 +3,16 @@
 This container is an git remote server to store all your projects.
 
 ---
-## Run container and Clone project
-
-Build container:
-```
-docker build -t basic-ssh-git-server:latest .
-```
+## Run container
 
 Run container:
 ```
-docker run -p 2222:22 -v ./data:/repository -it --name git-remote-server basic-ssh-git-server:latest
+docker run -p 22:22 -v ./data:/repository -it --name gitserver-ssh marcoshssilvadev/gitserver-ssh:latest
 ```
 
-Clone project:
+Clone project from **gitserver-ssh**:
 ```
-git clone ssh://git@localhost:2222/repository/default.git
+git clone ssh://git@localhost:22/repository/default.git
 ```
 > Default user 'git'
 > Default password 'git'
@@ -31,36 +26,45 @@ ssh-keygen -f "~/.ssh/known_hosts" -R "[localhost]:2222"
 ---
 ## How to create repository
 
-Run following commands as example:
+Use following script:
 ```
 # Access shell container with user 'git'
-docker exec -it -u git $CONTAINER_ID /bin/bash
-
-# Create project
-mkdir /repository/$PROJECT_NAME.git
-
-# Initialize project as remote
-cd /repository/$PROJECT_NAME.git
-git init --bare
+docker exec -it -u git $CONTAINER_ID /bin/bash /root/scripts/create_repository.sh NAME_OF_REPO_HERE
 ```
-> $CONTAINER_ID is id referenced on your container
-> $PROJECT_NAME is name of project when you make clone
 
 ---
-## Change password from user 'git'
+## Include new ssh key
 
-Run following commands as example:
+Use following script:
+```
+# Access shell container with user 'git'
+docker exec -it -u git $CONTAINER_ID /bin/bash /root/scripts/add_ssh_key.sh SSH_KEY_HERE
+```
+
+---
+## Change password from users
+
+Change password from user 'git'
 ```
 # Access shell container with 'root'
-docker exec -it -u root $CONTAINER_ID /bin/bash
-
-# Change password from 'git' user
-echo 'git:$NEW_PASSWORD' | chpasswd
+docker exec -it -u root $CONTAINER_ID /bin/bash /root/scripts/update_git_password.sh
 ```
-> #NEW_PASSWORD is new password to user, after run this password will encrypted
+
+Change password from user 'root'
+```
+# Access shell container with 'root'
+docker exec -it -u root $CONTAINER_ID /bin/bash /root/scripts/update_root_password.sh
+```
 
 ---
 ## Build project with Docker Buildx
 ```
 docker buildx build --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x --tag marcoshssilvadev/gitserver-ssh:latest .
+```
+
+## Build from this repository
+```
+git clone https://github.com/marcoshssilva/gitserver-ssh.git
+cd gitserver-ssh
+docker build -t marcoshssilvadev/gitserver-ssh:latest .
 ```
