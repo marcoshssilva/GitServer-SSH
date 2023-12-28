@@ -1,4 +1,4 @@
-FROM ubuntu:mantic
+FROM app-nx.marcoshssilva.com.br/ubuntu:mantic
 
 USER root
 
