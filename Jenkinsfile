@@ -1,2 +1,2 @@
 @Library('docker@main') _
-pipelineDockerWithPublicImage('marcoshssilva/ubuntu-with-tools');
+pipelineDockerWithPublicImage('marcoshssilva/gitserver-ssh');
